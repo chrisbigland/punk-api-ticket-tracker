@@ -1,5 +1,13 @@
-import styles from './App.module.scss';
+import styles from "./App.module.scss";
 import { useState, useEffect } from "react";
+
+import FeedbackPanel from "./components/FeedbackPanel";
+import Beer from "./components/Beer";
+import SearchBar from "./components/SearchBar";
+
+import Main from "./containers/Main";
+import BeerContainer from "./containers/BeerContainer";
+import SideNav from "./containers/SideNav";
 
 const App = () => {
   const [beers, setBeers] = useState([]);
@@ -18,10 +26,16 @@ const App = () => {
   }, []);
 
   return (
-    <div className={styles.hello}>
-      <p>App works...</p>
+    <div>
+      <p className={styles.hello}>App works...</p>
+      <Main />
+      <SideNav />
+      <Beer />
+      <FeedbackPanel />
+      <SearchBar />
+      <BeerContainer />
     </div>
   );
-}
+};
 
 export default App;
