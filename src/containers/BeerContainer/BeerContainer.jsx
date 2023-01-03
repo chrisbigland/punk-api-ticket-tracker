@@ -3,13 +3,19 @@ import styles from './BeerContainer.module.scss'
 
 import Beer from '../../components/Beer/Beer'
 
-const BeerContainer = () => {
+const BeerContainer = (props) => {
+
+  const { beers } = props;
+
+
   return (
     <>
     <div>
-      BeerContainer works...
+      {beers.map((beer) => {
+        return   <Beer beer={beer}/>
+      })}
     </div>
-    <Beer />
+
     </>
   )
 }

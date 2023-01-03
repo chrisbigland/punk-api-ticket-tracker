@@ -22,10 +22,17 @@ const App = () => {
   }, []);
 
   return (
-    <section className={styles.hello}>
-      <Main />
+      <>
+    <main className={styles.content}>
+    <section className={styles.sideNav}>
       <SideNav />
     </section>
+
+    <section className={styles.main}>
+      <Main beers={beers}/>
+      </section>
+    </main>
+      </>
   );
 };
 

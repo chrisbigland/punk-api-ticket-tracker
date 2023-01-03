@@ -3,13 +3,16 @@ import styles from './Main.module.scss'
 import BeerContainer from '../BeerContainer/BeerContainer'
 import FeedbackPanel from '../../components/FeedbackPanel/FeedbackPanel'
 
-const Main = () => {
+const Main = (props) => {
+
+  const { beers } = props; // beer data
+
   return (
     <>
     <div className={styles.mainStyles}>
 
     </div>
-    {/* <BeerContainer /> */}
+    <BeerContainer beers={beers}/>
     {/* <FeedbackPanel /> */}
     </>
   )
