@@ -1,12 +1,8 @@
 import styles from "./App.module.scss";
 import { useState, useEffect } from "react";
-
-import FeedbackPanel from "./components/FeedbackPanel";
-import Beer from "./components/Beer";
-import SearchBar from "./components/SearchBar";
+// state to be search value and checkbox value
 
 import Main from "./containers/Main";
-import BeerContainer from "./containers/BeerContainer";
 import SideNav from "./containers/SideNav";
 
 const App = () => {
@@ -26,15 +22,10 @@ const App = () => {
   }, []);
 
   return (
-    <div>
-      <p className={styles.hello}>App works...</p>
+    <section className={styles.hello}>
       <Main />
       <SideNav />
-      <Beer />
-      <FeedbackPanel />
-      <SearchBar />
-      <BeerContainer />
-    </div>
+    </section>
   );
 };
 
