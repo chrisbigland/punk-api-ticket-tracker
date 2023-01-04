@@ -9,12 +9,10 @@ import SideNav from "./containers/SideNav";
 
 const App = () => {
   const [beers, setBeers] = useState([]);
-  // const [updatedBeersArr, setUpdatedBeersArr] = useState([]); // this will contain "isShowing" property
-  // const [highestABV, setHighestABV] = useState("");
-  // have a state here that stores the search text
-  // const baseAPI = aBV.checked ? "https://api.punkapi.com/v2/beers?page=1&per_page=80" : classic.checked ? "https://api.punkapi.com/v2/beers?page=1&per_page=80" : acidic.checked ? "https://api.punkapi.com/v2/beers?page=1&per_page=80" : "https://api.punkapi.com/v2/beers?page=1&per_page=80";
+
   const [pageContent, setPageContent] = useState("https://api.punkapi.com/v2/beers?page=1&per_page=80");
 
+  const [radioValue, setRadioValue] = useState("");
 
 
   const updateDisplayedBeers = (searchTerm) => {
@@ -25,7 +23,6 @@ const App = () => {
   }
 
   const getBeers = () => {    // fetches beers from API (make it according to searchTerm)
-    // fetch("https://api.punkapi.com/v2/beers")
       fetch(pageContent)
       .then((response) => response.json())
       .then((jsonResponse) => setBeers(jsonResponse));
@@ -47,15 +44,35 @@ const App = () => {
 
   }, [beers]);
 
+
+const aBV = document.querySelector("#abv")
+const classic = document.querySelector("#classic")
+const acidic = document.querySelector("#acidic")
+
+const updateBeerJSX = () => {
+  if (aBV.checked) {
+    console.log("ABV is checked")
+    setRadioValue("abv")
+  }
+  else if (classic.checked) {
+    console.log("classic is checked")
+    setRadioValue("classic")
+  }
+  else if (acidic.checked) {
+    console.log("acidic is checked")
+    setRadioValue("acidic")
+  }
+}
+
   return (
     <>
       <main className={styles.content}>
         <section className={styles.sideNav}>
-          <SideNav updateSearchText={updateDisplayedBeers}/>
+          <SideNav updateSearchText={updateDisplayedBeers} updateBeerJSX={updateBeerJSX}/>
         </section>
 
         <section className={styles.main}>
-          <Main beers={beers} />
+          <Main beers={beers} radioValue={radioValue}/>
         </section>
       </main>
     </>
@@ -70,4 +87,6 @@ export default App;
 // if no image - put in a placeholder image. 
 // radio buttons - use a filter
 // get multiple showing on page. 
+// change variable names especially updatebeersjsx
 // include shorten description function as in mealworm CardBack.jsx
+//Add radio button - all beers
