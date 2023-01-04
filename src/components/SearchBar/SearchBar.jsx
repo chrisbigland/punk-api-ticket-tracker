@@ -3,12 +3,15 @@ import styles from './SearchBar.module.scss'
 
 const SearchBar = (props) => {
 
-  const { updateSearchText } = props;
+  const { updateSearchText, placeholder } = props;
 
   return (
     <>
-    <input className={styles.searchBar} type="text" placeholder="Search beers..." onInput={e => updateSearchText(e.target.value)} /> {/* onInput updatesearchText function here set to e.target.value*/}
+    <input className={styles.searchBar} type="text" placeholder={placeholder} onInput={e => 
+       updateSearchText(e.target.value)} /> {/*put in a useEffect here so it only runs when beers exist?*/}
     </>
+
+    
   )
 }
 

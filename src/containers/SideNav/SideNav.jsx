@@ -12,7 +12,7 @@ const SideNav = (props) => {
     <>
  
     <section className={styles.sideNav}>
-    <SearchBar updateSearchText={updateSearchText}/>
+    <SearchBar updateSearchText={updateSearchText} placeholder="Search beers..."/>
     <RadioButtons />
     </section>
     </>
