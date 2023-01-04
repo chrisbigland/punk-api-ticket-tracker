@@ -5,26 +5,28 @@ import { useState, useEffect } from "react";
 import Main from "./containers/Main";
 import SideNav from "./containers/SideNav";
 
+
+
 const App = () => {
   const [beers, setBeers] = useState([]);
   // const [updatedBeersArr, setUpdatedBeersArr] = useState([]); // this will contain "isShowing" property
   // const [highestABV, setHighestABV] = useState("");
   // have a state here that stores the search text
-  const [searchText, setSearchText] = useState("");
+  // const baseAPI = aBV.checked ? "https://api.punkapi.com/v2/beers?page=1&per_page=80" : classic.checked ? "https://api.punkapi.com/v2/beers?page=1&per_page=80" : acidic.checked ? "https://api.punkapi.com/v2/beers?page=1&per_page=80" : "https://api.punkapi.com/v2/beers?page=1&per_page=80";
+  const [pageContent, setPageContent] = useState("https://api.punkapi.com/v2/beers?page=1&per_page=80");
 
-  //write the updateDisplayedBeers function here. Pass it down as props down to SearchBar via SideNav. Make it accept a 'search Term'
+
 
   const updateDisplayedBeers = (searchTerm) => {
     console.log("searchTerm is ", searchTerm)
-    setSearchText(searchTerm);
-    console.log("searchText state is ", searchText)
+    const newPageContent = searchTerm ? "https://api.punkapi.com/v2/beers?beer_name=" + searchTerm : "https://api.punkapi.com/v2/beers?page=1&per_page=80";
+    setPageContent(newPageContent);
+    console.log("pageContent state is ", pageContent)
   }
-// ${searchText}
 
-  const getBeers = (searchTerm) => {    // fetches beers from API (make it according to searchTerm)
-    console.log("searchTerm is", searchTerm)
-    fetch("https://api.punkapi.com/v2/beers")
-    // fetch(`https://api.punkapi.com/v2/beers?beer_name=Amarillo`) 
+  const getBeers = () => {    // fetches beers from API (make it according to searchTerm)
+    // fetch("https://api.punkapi.com/v2/beers")
+      fetch(pageContent)
       .then((response) => response.json())
       .then((jsonResponse) => setBeers(jsonResponse));
       console.log("beers are ", beers)
@@ -33,7 +35,7 @@ const App = () => {
   useEffect(() => {
     getBeers();
     console.log(beers);
-  }, []);
+  }, [pageContent]);
 
   // useEffect(() => {
   //   setUpdatedBeersArr(beers.map((beer) => {
@@ -61,3 +63,11 @@ const App = () => {
 };
 
 export default App;
+
+
+
+// TASK LIST
+// if no image - put in a placeholder image. 
+// radio buttons - use a filter
+// get multiple showing on page. 
+// include shorten description function as in mealworm CardBack.jsx
