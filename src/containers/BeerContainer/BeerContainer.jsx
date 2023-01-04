@@ -10,9 +10,9 @@ const BeerContainer = (props) => {
 
   return (
     <>
-    <div>
+    <div className={styles.beers}>
       {beers.map((beer) => {
-        return   <Beer beer={beer}/>
+        return <Beer beer={beer} key={beer.id}/>
       })}
     </div>
 

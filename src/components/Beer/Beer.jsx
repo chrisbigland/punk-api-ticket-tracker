@@ -5,12 +5,15 @@ const Beer = (props) => {
   const { beer } = props;
 
   return (
-<div>
-          <img src={beer.image_url} alt="picture of beer" />
-          <h1>{beer.name}</h1>
-          <h2>Here is all the most important info about the beer</h2>
-        </div>
-  )
+    <div className={styles.card}>
+      <img className={styles.img} src={beer.image_url} alt="picture of beer" />
+      <h1>{beer.name}</h1>
+      <p>Here is all the most important info about the beer</p>
+      <p>{beer.abv}% ABV</p>
+      <p>ph{beer.ph}</p>
+      <p>First Brewed in:{beer.first_brewed}</p>
+    </div>
+  );
 }
 
 export default Beer

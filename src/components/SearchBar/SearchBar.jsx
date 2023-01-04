@@ -1,10 +1,14 @@
 import React from 'react'
+import styles from './SearchBar.module.scss'
 
-const SearchBar = () => {
+const SearchBar = (props) => {
+
+  const { updateSearchText } = props;
+
   return (
-    <div>
-      SearchBar works...
-    </div>
+    <>
+    <input className={styles.searchBar} type="text" placeholder="Search beers..." onInput={e => updateSearchText(e.target.value)} /> {/* onInput updatesearchText function here set to e.target.value*/}
+    </>
   )
 }
 

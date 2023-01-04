@@ -10,7 +10,6 @@ const Main = (props) => {
   return (
     <>
     <div className={styles.mainStyles}>
-
     </div>
     <BeerContainer beers={beers}/>
     {/* <FeedbackPanel /> */}

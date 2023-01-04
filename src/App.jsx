@@ -7,7 +7,17 @@ import SideNav from "./containers/SideNav";
 
 const App = () => {
   const [beers, setBeers] = useState([]);
+  const [updatedBeersArr, setUpdatedBeersArr] = useState([]); // this will contain "isShowing" property
   // const [highestABV, setHighestABV] = useState("");
+  // have a state here that stores the search text
+  // const [searchText, setSearchText] = useState();
+
+  //write the updateDisplayedBeers function here. Pass it down as props down to SearchBar via SideNav. Make it accept a 'search Term'
+
+  const updateDisplayedBeers = (searchTerm) => {
+    console.log("searchTerm is ", searchTerm)
+  }
+
 
   const getBeers = () => {
     fetch("https://api.punkapi.com/v2/beers")
@@ -16,23 +26,30 @@ const App = () => {
   };
 
   useEffect(() => {
-    // console.log("I will only run once");
     getBeers();
     console.log(beers);
   }, []);
 
-  return (
-      <>
-    <main className={styles.content}>
-    <section className={styles.sideNav}>
-      <SideNav />
-    </section>
+  useEffect(() => {
+    setUpdatedBeersArr(beers.map((beer) => {
+      return { beer, isShowing: true };
+    }));
+    console.log("updatedBeersArr is", updatedBeersArr);
+  }, [beers]);
 
-    <section className={styles.main}>
-      <Main beers={beers}/>
-      </section>
-    </main>
-      </>
+
+  return (
+    <>
+      <main className={styles.content}>
+        <section className={styles.sideNav}>
+          <SideNav updateSearchText={updateDisplayedBeers}/>
+        </section>
+
+        <section className={styles.main}>
+          <Main beers={beers} />
+        </section>
+      </main>
+    </>
   );
 };
 
