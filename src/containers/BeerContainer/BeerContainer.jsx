@@ -1,66 +1,66 @@
-import React, { useEffect } from 'react'
-import styles from './BeerContainer.module.scss'
+import React, { useEffect } from "react";
+import styles from "./BeerContainer.module.scss";
 
-import Beer from '../../components/Beer/Beer'
-import FeedbackPanel from '../../components/FeedbackPanel/FeedbackPanel';
-
+import Beer from "../../components/Beer/Beer";
+import FeedbackPanel from "../../components/FeedbackPanel/FeedbackPanel";
 
 const BeerContainer = (props) => {
-
   const { beers, radioValue } = props;
 
+  console.log("beers", beers);
+
   const mappedBeers = beers.map((beer) => {
-    return <Beer beer={beer} key={beer.id}/>
-  })
+    return <Beer beer={beer} key={beer.id} />;
+  });
 
-  // const getBeersJSX = () => {
-  //   if (radioValue === "all" && beers.length) {
-  //     return mappedBeers;
-  // }
-  //   else if (radioValue === "abv" && beers.length) {
-  //    const highAbvBeers = mappedBeers.filter((beer) => {
-  //       return beer.props.beer.abv > 6})
-  //     return highAbvBeers;
-  //   }
-  //   else if (radioValue === "classic" && beers.length) {
-  //     const classicBeers = mappedBeers.filter((beer) => {
-  //       return beer.props.beer.first_brewed.slice(3) < 2010
-  //     })
-  //     return classicBeers;
-  //   }
-  //   else if (radioValue === "acidic" && beers.length) {
-  //     const acidicBeers = mappedBeers.filter((beer) => {
-  //       return beer.props.beer.ph < 4 
-  //     })
-  //     return acidicBeers;
-  //   } else {
-  //     return <FeedbackPanel />
-  //   }
-  // }
+  const getBeersJSX = () => {
+    if (radioValue === "all" && beers.length) {
+      return mappedBeers;
+    } else if (radioValue === "abv" && beers.length) {
+      const highAbvBeers = mappedBeers.filter((beer) => {
+        return beer.props.beer.abv > 6;
+      });
+      return highAbvBeers.length <= 0 ? (
+        <FeedbackPanel text="We're sorry but there aren't any beers matching that criteria. " />
+      ) : (
+        highAbvBeers
+      );
+    } else if (radioValue === "classic" && beers.length) {
+      const classicBeers = mappedBeers.filter((beer) => {
+        return beer.props.beer.first_brewed.slice(3) < 2010;
+      });
+      return classicBeers.length <= 0 ? (
+        <FeedbackPanel text="We're sorry but there aren't any beers matching that criteria. " />
+      ) : (
+        classicBeers
+      );
+    } else if (radioValue === "acidic" && beers.length) {
+      const acidicBeers = mappedBeers.filter((beer) => {
+        return beer.props.beer.ph < 4;
+      });
+      return acidicBeers.length <= 0 ? (
+        <FeedbackPanel text="We're sorry but there aren't any beers matching that criteria. " />
+      ) : (
+        acidicBeers
+      );
+    } else {
+      return (
+        <FeedbackPanel text="We're sorry but there aren't any beers matching that criteria. " />
+      );
+    }
+  };
 
-  // useEffect(() => {
-  //  getBeersJSX()
-  // }, [beers])
+  useEffect(() => {
+    getBeersJSX();
+  }, [beers]);
 
-
-  const beersJSX = radioValue === "all" && beers.length ? mappedBeers : radioValue === "abv" && beers.length ? mappedBeers.filter((beer) => {
-    return beer.props.beer.abv > 6
-  }) : radioValue === "classic" && beers.length ? mappedBeers.filter((beer) => {
-    return beer.props.beer.first_brewed.slice(3) < 2010
-  }) : radioValue === "acidic" && beers.length ? mappedBeers.filter((beer) => {
-    return beer.props.beer.ph < 4 
-  }) : beers.length ? mappedBeers : <FeedbackPanel text="We're sorry but there aren't any beers matching that criteria. "/> ; 
-
-  console.log("beersJSX is ", beersJSX)
-
+  const beersJsx = getBeersJSX();
 
   return (
     <>
-    <div className={styles.beers}>
-      {beersJSX}
-    </div>
+      <div className={styles.beers}>{beersJsx}</div>
     </>
-  )
-}
+  );
+};
 
-export default BeerContainer
+export default BeerContainer;

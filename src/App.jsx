@@ -9,7 +9,7 @@ const App = () => {
   const [pageContent, setPageContent] = useState(
     "https://api.punkapi.com/v2/beers?page=1&per_page=80"
   );
-  const [radioValue, setRadioValue] = useState("");
+  const [radioValue, setRadioValue] = useState("all");
 
 
   const updateDisplayedBeers = (searchTerm) => {
@@ -25,7 +25,7 @@ const App = () => {
     // adds in a placeholder image to any item with 'null' for an image URL
     const cleanedBeers = beers.map((beer) => {
       if (beer.props.beer.image_url === null) {
-        beer.props.beer.image_url = "../images/brewdog.png"
+        beer.props.beer.image_url = './images/brewdog.png'
       }
     })
     return cleanedBeers
@@ -60,7 +60,7 @@ const App = () => {
              setRadioValue={setRadioValue} 
           />
         </section>
-
+        {/* <img src={require('./images/brewdog.png')} /> */}
         <section className={styles.main}>
           <Main beers={beers} radioValue={radioValue} />
         </section>

@@ -16,7 +16,6 @@ const Main = (props) => {
       </div>
     </div>
     <BeerContainer beers={beers} radioValue={radioValue}/>
-    {/* <FeedbackPanel /> */}
     </>
   )
 }
