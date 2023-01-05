@@ -11,10 +11,6 @@ const App = () => {
   );
   const [radioValue, setRadioValue] = useState("");
 
-  const allBeers = document.querySelector("#all-beers");
-  const aBV = document.querySelector("#abv");
-  const classic = document.querySelector("#classic");
-  const acidic = document.querySelector("#acidic");
 
   const updateDisplayedBeers = (searchTerm) => {
     // uses the search text to display relevant beers on the screen
@@ -38,18 +34,7 @@ const App = () => {
     console.log(beers);
   }, [pageContent]);
 
-  const allocateCheck = () => {
-    // sets 'radioValue' state according to which radio button is checked
-    if (allBeers.checked) {
-      setRadioValue("all");
-    } else if (aBV.checked) {
-      setRadioValue("abv");
-    } else if (classic.checked) {
-      setRadioValue("classic");
-    } else if (acidic.checked) {
-      setRadioValue("acidic");
-    }
-  };
+
 
   return (
     <>
@@ -57,7 +42,7 @@ const App = () => {
         <section className={styles.sideNav}>
           <SideNav
             updateSearchText={updateDisplayedBeers}
-            allocateCheck={allocateCheck}
+             setRadioValue={setRadioValue} 
           />
         </section>
 
@@ -78,5 +63,5 @@ export default App;
 // include shorten description function as in mealworm CardBack.jsx
 // write tests
 // does updatebeersJSX need to be in app? Could it be further down and just state passed down and updated??
-
+// sort out feedback panel
 // write readme
