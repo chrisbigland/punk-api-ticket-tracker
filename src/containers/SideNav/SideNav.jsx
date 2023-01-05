@@ -6,14 +6,14 @@ import RadioButtons from '../../components/RadioButtons'
 
 const SideNav = (props) => {
 
-  const { updateSearchText, updateBeerJSX } = props;
+  const { updateSearchText, allocateCheck } = props;
 
   return (
     <>
  
     <section className={styles.sideNav}>
     <SearchBar updateSearchText={updateSearchText} placeholder="Search beers..." />
-    <RadioButtons updateBeerJSX={updateBeerJSX}/>
+    <RadioButtons allocateCheck={allocateCheck}/>
     </section>
     </>
   )
