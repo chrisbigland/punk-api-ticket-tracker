@@ -1,10 +1,13 @@
 import React from 'react'
 import styles from './FeedbackPanel.module.scss'
 
-const FeedbackPanel = () => {
+const FeedbackPanel = (props) => {
+
+  const { text } = props;
+
   return (
     <div>
-      We're sorry there aren't any beers matching that criteria. 
+      {text}
     </div>
   )
 }

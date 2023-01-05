@@ -49,7 +49,7 @@ const BeerContainer = (props) => {
     return beer.props.beer.first_brewed.slice(3) < 2010
   }) : radioValue === "acidic" && beers.length ? mappedBeers.filter((beer) => {
     return beer.props.beer.ph < 4 
-  }) : <FeedbackPanel /> ; 
+  }) : beers.length ? mappedBeers : <FeedbackPanel text="We're sorry but there aren't any beers matching that criteria. "/> ; 
 
   console.log("beersJSX is ", beersJSX)
 

@@ -21,12 +21,27 @@ const App = () => {
     setPageContent(newPageContent);
   };
 
+  const cleanBeers = (beers) => {
+    // adds in a placeholder image to any item with 'null' for an image URL
+    const cleanedBeers = beers.map((beer) => {
+      if (beer.props.beer.image_url === null) {
+        beer.props.beer.image_url = "../images/brewdog.png"
+      }
+    })
+    return cleanedBeers
+  }
+
   const getBeers = () => {
     // fetches beers from API and sets them to state 'beers'
     fetch(pageContent)
       .then((response) => response.json())
       .then((jsonResponse) => setBeers(jsonResponse));
+      // console.log(jsonResponse)
   };
+
+  // cleanBeers(jsonResponse));
+  // console.log(jsonResponse);
+  // setBeers(jsonResponse);
 
   useEffect(() => {
     // calls getBeers() only once the pageContent (state containing relevant fetch URL) has been set.
@@ -62,3 +77,4 @@ export default App;
 // write tests
 // sort out feedback panel
 // write readme
+// make feedback panel reusable (pass content down as props)
