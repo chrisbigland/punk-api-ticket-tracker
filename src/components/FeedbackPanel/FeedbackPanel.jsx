@@ -4,7 +4,7 @@ import styles from './FeedbackPanel.module.scss'
 const FeedbackPanel = () => {
   return (
     <div>
-      FeedbackPanel works...
+      We're sorry there aren't any beers matching that criteria. 
     </div>
   )
 }

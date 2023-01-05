@@ -59,9 +59,6 @@ export default App;
 // TASK LIST
 // if no image - put in a placeholder image.
 // get multiple (more than 80) showing on page.
-// change variable names especially updatebeersjsx
-// include shorten description function as in mealworm CardBack.jsx
 // write tests
-// does updatebeersJSX need to be in app? Could it be further down and just state passed down and updated??
 // sort out feedback panel
 // write readme
