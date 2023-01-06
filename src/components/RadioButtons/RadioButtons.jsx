@@ -7,17 +7,21 @@ const RadioButtons = (props) => {
   
   return (
     <form className={styles.buttons}>
+      <label htmlFor="all-beers">
       <input type="radio" id="all-beers" name="beer-filter" value="All Beers" defaultChecked onChange={allocateCheck}/>
-      <label htmlFor="all-beers">All Beers</label>
+      All Beers</label>
 
+      <label htmlFor="high-abv">
       <input type="radio" id="abv" name="beer-filter" value="High ABV (> 6.0%)" onChange={allocateCheck}/>
-      <label htmlFor="high-abv">{`High ABV > 6.0%`}</label>
-
+      {`High ABV > 6.0%`}</label>
+      
+      <label htmlFor="classic-range">
       <input type="radio" id="classic" name="beer-filter" value="Classic Range" onChange={allocateCheck}/>
-      <label htmlFor="classic-range">Classic Range</label>
+      Classic Range</label>
 
+      <label htmlFor="acidic">
       <input type="radio" id="acidic" name="beer-filter" value="Acidic (ph < 4)" onChange={allocateCheck}/>
-      <label htmlFor="acidic">Acidic {`(ph < 4)`}</label>
+      Acidic {`(ph < 4)`}</label>
     </form>
   )
 }
