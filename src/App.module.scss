@@ -1,11 +1,17 @@
 .sideNav {
-    border: solid 2px red;
-    width: 15vw;
+    width: 13vw;
     height: 100vw;
+    background-color: #FFFCF0;
+    border-right: 1px solid gold;
 }
 
 
 
 .content {
     display: flex;
+}
+
+.main {
+    background-image: url('./images/beer.jpg');
+    width: 87vw;
 }
