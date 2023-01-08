@@ -7,7 +7,7 @@ import SideNav from "./containers/SideNav";
 const App = () => {
   const [beers, setBeers] = useState([]);
   const [pageContent, setPageContent] = useState(
-    "https://api.punkapi.com/v2/beers?page=5&per_page=80"
+    "https://api.punkapi.com/v2/beers?page=4&per_page=80"
   );
   const [radioValue, setRadioValue] = useState("all");
 
