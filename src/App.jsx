@@ -7,20 +7,9 @@ import SideNav from "./containers/SideNav";
 const App = () => {
   const [beers, setBeers] = useState([]);
   const [pageContent, setPageContent] = useState(
-    "https://api.punkapi.com/v2/beers?page=1&per_page=80"
+    "https://api.punkapi.com/v2/beers?page=5&per_page=80"
   );
   const [radioValue, setRadioValue] = useState("all");
-
-//   const setPageNum = () => {
-//   const pages = [1, 2, 3, 4, 5]
-
-//   for(let i = 0; i < pages.length; i++) {
-//       console.log(pages[i])
-//       return pages[i]
-//   }
-// }
-// console.log("setPageNum return is ", setPageNum())
-  // "https://api.punkapi.com/v2/beers?page=1&per_page=80"
 
   const updateDisplayedBeers = (searchTerm) => {
     // uses the search text to display relevant beers on the screen
@@ -31,26 +20,27 @@ const App = () => {
     setPageContent(newPageContent);
   };
 
-  // const cleanBeers = (beers) => {
-  //   // adds in a placeholder image to any item with 'null' for an image URL
-  //   const cleanedBeers = beers.map((beer) => {
-  //     if (beer.props.beer.image_url === null) {
-  //       beer.props.beer.image_url = './images/brewdog.png'
-  //       return beer // ??
-  //     }
-  //     else {
-  //       return beer
-  //     }
-  //   })
-  //   return cleanedBeers
-  // }
+  const cleanBeers = (beers) => {
+    // adds in a placeholder image to any item with 'null' for an image URL
+    const cleanedBeers = beers.map((beer) => {
+      if (beer.image_url === null) {
+        beer.image_url = require("./images/brewdog.png");
+        return beer;
+      } else {
+        return beer;
+      }
+    });
+    console.log("");
+    return cleanedBeers;
+  };
 
   const getBeers = () => {
     // fetches beers from API and sets them to state 'beers'
     fetch(pageContent)
       .then((response) => response.json())
-      .then((jsonResponse) => setBeers(jsonResponse));
-      // console.log(jsonResponse)
+      .then((jsonResponse) => {
+        setBeers(cleanBeers(jsonResponse));
+      });
   };
 
   // cleanBeers(jsonResponse));
@@ -63,15 +53,13 @@ const App = () => {
     console.log(beers);
   }, [pageContent]);
 
-
-
   return (
     <>
       <main className={styles.content}>
         <section className={styles.sideNav}>
           <SideNav
             updateSearchText={updateDisplayedBeers}
-             setRadioValue={setRadioValue} 
+            setRadioValue={setRadioValue}
           />
         </section>
         {/* <img src={require('./images/brewdog.png')} /> */}
