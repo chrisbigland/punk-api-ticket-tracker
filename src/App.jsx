@@ -10,6 +10,7 @@ const App = () => {
     "https://api.punkapi.com/v2/beers?page=4&per_page=80"
   );
   const [radioValue, setRadioValue] = useState("all");
+  const [ apiBeersArr, setApiBeersArr ] = useState([]);
 
   const updateDisplayedBeers = (searchTerm) => {
     // uses the search text to display relevant beers on the screen
@@ -43,15 +44,41 @@ const App = () => {
       });
   };
 
-  // cleanBeers(jsonResponse));
-  // console.log(jsonResponse);
-  // setBeers(jsonResponse);
+  // const getBeers = () => {
+  //   for (let index = 1; index < 6; index++) {
+  //     // fetches beers from API and sets them to state 'beers'
+  //     fetch(`https://api.punkapi.com/v2/beers?page=${index}&per_page=80`)
+  //       .then((response) => response.json())
+  //       .then((jsonResponse) => {
+  //         setApiBeersArr(
+  //           apiBeersArr.length < 5
+  //             ? apiBeersArr.push(jsonResponse)
+  //             : apiBeersArr
+  //         );
+  //       });
+  //   }
+  // };
+
+  // //a function to combine an array of 5 arrays. 
+  // const combineData = (data) => {
+  //   console.log("apiBeersArr is now called 'data', is in combineData function and the value is ", data);
+  //   console.log(data[0].concat(data[1], data[2], data[3], data[4]))
+  // }
+
+
 
   useEffect(() => {
     // calls getBeers() only once the pageContent (state containing relevant fetch URL) has been set.
     getBeers();
     console.log(beers);
   }, [pageContent]);
+
+
+  // useEffect(() => {
+  //   // calls getBeers() only once the pageContent (state containing relevant fetch URL) has been set.
+  //   console.log("apiBeersArr is ", apiBeersArr)
+  //   combineData(apiBeersArr)
+  // }, [apiBeersArr]);
 
   return (
     <>
