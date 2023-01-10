@@ -7,10 +7,11 @@ import FeedbackPanel from "../../components/FeedbackPanel/FeedbackPanel";
 const BeerContainer = (props) => {
   const { beers, radioValue } = props;
 
-  console.log("beers in beer container are ", beers);
-  console.log(beers.length)
+  // console.log("beers in beer container are ", beers);
+  // console.log(beers.length)
 
-  const mappedBeers = beers.map((beer) => {     // COULD IT BE THAT BEERS STATE HASN"T UPDATED BEFORE WE GET THE MAPPED BEERS?
+  const mappedBeers = beers.map((beer) => { 
+    console.log("mapping of beers in progress")    // COULD IT BE THAT BEERS STATE HASN"T UPDATED BEFORE WE GET THE MAPPED BEERS?
     return <Beer beer={beer} key={beer.id} />;
   });
 
@@ -45,14 +46,17 @@ const BeerContainer = (props) => {
         acidicBeers
       );
     } else {
+      console.log("we are in the else clause")
       return (
         <FeedbackPanel text="We're sorry but there aren't any beers matching that criteria. " />
+   
+        
       );
     }
   };
 
   useEffect(() => {
-    console.log(beers)
+    // console.log(beers)
     getBeersJSX();
   }, [beers]);
 

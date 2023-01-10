@@ -6,19 +6,20 @@ import SideNav from "./containers/SideNav";
 
 const App = () => {
   const [beers, setBeers] = useState([]);
-  const [pageContent, setPageContent] = useState(           // default state set to page 1 of api
+  const [pageContent, setPageContent] = useState(     // CHANGE STATE NAMES TO BE MORE REFLECTIVE OF WHAT IT'S DOING
+    // default state set to page 1 of api
     "https://api.punkapi.com/v2/beers?page=1&per_page=80"
   );
   const [radioValue, setRadioValue] = useState("all");
 
-  // const updateDisplayedBeers = (searchTerm) => {
-  //   // uses the search text to display relevant beers on the screen
-  //   console.log("searchTerm is ", searchTerm);
-  //   const newPageContent = searchTerm                             // I BELIEVE THIS PART IS NOW BROKEN - could use a filter instead?!?
-  //     ? "https://api.punkapi.com/v2/beers?beer_name=" + searchTerm
-  //     : "https://api.punkapi.com/v2/beers?page=1&per_page=80";
-  //   setPageContent(newPageContent);
-  // };
+  const updateDisplayedBeers = (searchTerm) => {
+    // uses the search text to display relevant beers on the screen
+    console.log("searchTerm is ", searchTerm);
+    const newPageContent = searchTerm                             // CHANGE LOGIC HERE - get the data from state and use a filter instead. 
+      ? "https://api.punkapi.com/v2/beers?beer_name=" + searchTerm
+      : "https://api.punkapi.com/v2/beers?page=1&per_page=80";
+    setPageContent(newPageContent);
+  };
 
   const cleanBeers = (beers) => {
     // adds in a placeholder image to any item with 'null' for an image URL
@@ -43,14 +44,16 @@ const App = () => {
   //     });
   // };
 
-  const getBeers = () => {
-    let beerArr = [];
+  // How to deal with text appearing before beers load- if this fetch hasn't completed then display a 'loading' spinner element (state to add in)
+
+  const getBeers = async () => {
+    let beerArr = [];     // if there is a searchterm value then I want to run the pageContent (URL)
     for (let index = 1; index < 6; index++) {
       // fetches beers from API and sets them to state 'beers'
-      fetch(`https://api.punkapi.com/v2/beers?page=${index}&per_page=80`)
+      await fetch(`https://api.punkapi.com/v2/beers?page=${index}&per_page=80`)
         .then((response) => response.json())
         .then((jsonResponse) => {
-          beerArr.push(...jsonResponse)
+          beerArr.push(...jsonResponse);
 
           // console.log(jsonResponse)
           // setApiBeersArr(
@@ -60,10 +63,9 @@ const App = () => {
           // );
         });
     }
-    console.log(beerArr.length)
-    setBeers(beerArr)
+    console.log(beerArr.length);
+    setBeers(beerArr);
   };
-
 
   useEffect(() => {
     // calls getBeers() only once the pageContent (state containing relevant fetch URL) has been set.
@@ -71,15 +73,12 @@ const App = () => {
     // console.log(beers);
   }, [pageContent]);
 
- 
-
-
   return (
     <>
       <main className={styles.content}>
         <section className={styles.sideNav}>
           <SideNav
-            // updateSearchText={updateDisplayedBeers}
+            updateSearchText={updateDisplayedBeers}
             setRadioValue={setRadioValue}
           />
         </section>
