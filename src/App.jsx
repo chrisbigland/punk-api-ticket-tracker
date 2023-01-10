@@ -6,20 +6,19 @@ import SideNav from "./containers/SideNav";
 
 const App = () => {
   const [beers, setBeers] = useState([]);
-  const [pageContent, setPageContent] = useState(
-    "https://api.punkapi.com/v2/beers?page=4&per_page=80"
+  const [pageContent, setPageContent] = useState(           // default state set to page 1 of api
+    "https://api.punkapi.com/v2/beers?page=1&per_page=80"
   );
   const [radioValue, setRadioValue] = useState("all");
-  const [ apiBeersArr, setApiBeersArr ] = useState([]);
 
-  const updateDisplayedBeers = (searchTerm) => {
-    // uses the search text to display relevant beers on the screen
-    console.log("searchTerm is ", searchTerm);
-    const newPageContent = searchTerm
-      ? "https://api.punkapi.com/v2/beers?beer_name=" + searchTerm
-      : "https://api.punkapi.com/v2/beers?page=1&per_page=80";
-    setPageContent(newPageContent);
-  };
+  // const updateDisplayedBeers = (searchTerm) => {
+  //   // uses the search text to display relevant beers on the screen
+  //   console.log("searchTerm is ", searchTerm);
+  //   const newPageContent = searchTerm                             // I BELIEVE THIS PART IS NOW BROKEN - could use a filter instead?!?
+  //     ? "https://api.punkapi.com/v2/beers?beer_name=" + searchTerm
+  //     : "https://api.punkapi.com/v2/beers?page=1&per_page=80";
+  //   setPageContent(newPageContent);
+  // };
 
   const cleanBeers = (beers) => {
     // adds in a placeholder image to any item with 'null' for an image URL
@@ -51,7 +50,8 @@ const App = () => {
       fetch(`https://api.punkapi.com/v2/beers?page=${index}&per_page=80`)
         .then((response) => response.json())
         .then((jsonResponse) => {
-          beerArr.push(jsonResponse)
+          beerArr.push(...jsonResponse)
+
           // console.log(jsonResponse)
           // setApiBeersArr(
           //   apiBeersArr.length < 5
@@ -60,37 +60,26 @@ const App = () => {
           // );
         });
     }
-
-    // try setting one to state. Issue here appears to be that array is showing as empty in console however when we click into it, it has 5 items. 
     console.log(beerArr.length)
-    const newBeerArr = beerArr
-    console.log(newBeerArr)
-    // setApiBeersArr(newBeerArr)
-    // const joinedBeerArr = [...beerArr[0], ...beerArr[1], ...beerArr[2], ...beerArr[3], ...beerArr[4]]
-    // setApiBeersArr(joinedBeerArr)
+    setBeers(beerArr)
   };
-
-  //a function to combine an array of 5 arrays. 
-  const combineData = (data) => {
-    console.log("apiBeersArr is now called 'data', is in combineData function and the value is ", data);
-    console.log(data[0].concat(data[1], data[2], data[3], data[4]))
-  }
-
 
 
   useEffect(() => {
     // calls getBeers() only once the pageContent (state containing relevant fetch URL) has been set.
     getBeers();
     // console.log(beers);
-    // combineData(apiBeersArr)
   }, [pageContent]);
+
+ 
+
 
   return (
     <>
       <main className={styles.content}>
         <section className={styles.sideNav}>
           <SideNav
-            updateSearchText={updateDisplayedBeers}
+            // updateSearchText={updateDisplayedBeers}
             setRadioValue={setRadioValue}
           />
         </section>

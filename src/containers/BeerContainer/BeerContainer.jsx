@@ -7,13 +7,14 @@ import FeedbackPanel from "../../components/FeedbackPanel/FeedbackPanel";
 const BeerContainer = (props) => {
   const { beers, radioValue } = props;
 
-  console.log("beers", beers);
+  console.log("beers in beer container are ", beers);
+  console.log(beers.length)
 
-  const mappedBeers = beers.map((beer) => {
+  const mappedBeers = beers.map((beer) => {     // COULD IT BE THAT BEERS STATE HASN"T UPDATED BEFORE WE GET THE MAPPED BEERS?
     return <Beer beer={beer} key={beer.id} />;
   });
 
-  const getBeersJSX = () => {
+  const getBeersJSX = () => {         
     if (radioValue === "all" && beers.length) {
       return mappedBeers;
     } else if (radioValue === "abv" && beers.length) {
@@ -51,6 +52,7 @@ const BeerContainer = (props) => {
   };
 
   useEffect(() => {
+    console.log(beers)
     getBeersJSX();
   }, [beers]);
 
