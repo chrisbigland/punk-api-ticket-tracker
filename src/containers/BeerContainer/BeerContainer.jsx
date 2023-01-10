@@ -7,19 +7,20 @@ import FeedbackPanel from "../../components/FeedbackPanel/FeedbackPanel";
 const BeerContainer = (props) => {
   const { beers, radioValue } = props;
 
-  // console.log("beers in beer container are ", beers);
-  // console.log(beers.length)
+  const mappedBeers = beers.map((beer) => { // could do it as a ternary here? 
+    // mappedBeers = matchingBeers ? matchingBeers.map((beer) => { return <Beer beer={beer} key={beer.id} />  } : beers.map((beer) => { return <Beer beer={beer} key={beer.id} />;   }); )
 
-  const mappedBeers = beers.map((beer) => { 
-    console.log("mapping of beers in progress")    // COULD IT BE THAT BEERS STATE HASN"T UPDATED BEFORE WE GET THE MAPPED BEERS?
     return <Beer beer={beer} key={beer.id} />;
   });
 
-  const getBeersJSX = () => {         
-    if (radioValue === "all" && beers.length) {
+
+
+
+  const getBeersJSX = () => {         // add in a section here to factor in a new matching beers state. if matching beers 
+    if (radioValue === "all" && beers.length) { 
       return mappedBeers;
     } else if (radioValue === "abv" && beers.length) {
-      const highAbvBeers = mappedBeers.filter((beer) => {
+      const highAbvBeers = mappedBeers.filter((beer) => { 
         return beer.props.beer.abv > 6;
       });
       return highAbvBeers.length <= 0 ? (

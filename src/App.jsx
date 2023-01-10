@@ -15,7 +15,17 @@ const App = () => {
   const updateDisplayedBeers = (searchTerm) => {
     // uses the search text to display relevant beers on the screen
     console.log("searchTerm is ", searchTerm);
-    const newPageContent = searchTerm                             // CHANGE LOGIC HERE - get the data from state and use a filter instead. 
+    console.log(beers)
+    const matchingBeers = beers.filter((beer) => {
+      const beerName = beer.name.toLowerCase();
+    return beerName.includes(searchTerm.toLowerCase())
+    })
+
+    console.log(matchingBeers) // set it to state?
+    setBeers(matchingBeers)
+
+    console.log("beers are ", beers)
+    const newPageContent = searchTerm                             // CHANGE LOGIC HERE - get the data from state and use a filter instead. This used to set what was inside of the getBeers api call. 
       ? "https://api.punkapi.com/v2/beers?beer_name=" + searchTerm
       : "https://api.punkapi.com/v2/beers?page=1&per_page=80";
     setPageContent(newPageContent);
@@ -31,7 +41,6 @@ const App = () => {
         return beer;
       }
     });
-    console.log("");
     return cleanedBeers;
   };
 
