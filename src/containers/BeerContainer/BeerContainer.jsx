@@ -5,18 +5,21 @@ import Beer from "../../components/Beer/Beer";
 import FeedbackPanel from "../../components/FeedbackPanel/FeedbackPanel";
 
 const BeerContainer = (props) => {
-  const { beers, radioValue } = props;
+  const { beers, radioValue, matchingBeers } = props;
 
-  const mappedBeers = beers.map((beer) => { // could do it as a ternary here? 
-    // mappedBeers = matchingBeers ? matchingBeers.map((beer) => { return <Beer beer={beer} key={beer.id} />  } : beers.map((beer) => { return <Beer beer={beer} key={beer.id} />;   }); )
+
+  const mappedBeers =  matchingBeers.length > 0 ? matchingBeers.map((beer) => { return <Beer beer={beer} key={beer.id} />}) : beers.map((beer) => { 
+
 
     return <Beer beer={beer} key={beer.id} />;
   });
+  console.log("matchingbeer length is ", matchingBeers.length)
+  console.log(matchingBeers ? "matchingbeers beers has value" : "it doesn't have value")
 
 
 
 
-  const getBeersJSX = () => {         // add in a section here to factor in a new matching beers state. if matching beers 
+  const getBeersJSX = () => {        
     if (radioValue === "all" && beers.length) { 
       return mappedBeers;
     } else if (radioValue === "abv" && beers.length) {
@@ -57,7 +60,7 @@ const BeerContainer = (props) => {
   };
 
   useEffect(() => {
-    // console.log(beers)
+
     getBeersJSX();
   }, [beers]);
 

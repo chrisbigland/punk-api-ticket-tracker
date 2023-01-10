@@ -5,7 +5,7 @@ import FeedbackPanel from '../../components/FeedbackPanel/FeedbackPanel'
 
 const Main = (props) => {
 
-  const { beers, radioValue } = props; // beer data
+  const { beers, radioValue, matchingBeers } = props; // beer data
 
   return (
     <>
@@ -15,7 +15,7 @@ const Main = (props) => {
         <p className={styles.descrip}>Use the search bar and filters to take a look through our comprehensive back catalogue of beers!</p>
       </div>
     </div>
-    <BeerContainer beers={beers} radioValue={radioValue}/>
+    <BeerContainer beers={beers} radioValue={radioValue} matchingBeers={matchingBeers}/>
     </>
   )
 }

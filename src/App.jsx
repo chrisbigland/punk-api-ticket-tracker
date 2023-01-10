@@ -6,10 +6,11 @@ import SideNav from "./containers/SideNav";
 
 const App = () => {
   const [beers, setBeers] = useState([]);
-  const [pageContent, setPageContent] = useState(     // CHANGE STATE NAMES TO BE MORE REFLECTIVE OF WHAT IT'S DOING
+  const [pageContent, setPageContent] = useState(    "https://api.punkapi.com/v2/beers?page=1&per_page=80"
+  );     // CHANGE STATE NAMES TO BE MORE REFLECTIVE OF WHAT IT'S DOING
+  const [matchingBeers, setMatchingBeers] = useState([]);
     // default state set to page 1 of api
-    "https://api.punkapi.com/v2/beers?page=1&per_page=80"
-  );
+
   const [radioValue, setRadioValue] = useState("all");
 
   const updateDisplayedBeers = (searchTerm) => {
@@ -22,14 +23,19 @@ const App = () => {
     })
 
     console.log(matchingBeers) // set it to state?
-    setBeers(matchingBeers)
+    setMatchingBeers(matchingBeers)
 
     console.log("beers are ", beers)
-    const newPageContent = searchTerm                             // CHANGE LOGIC HERE - get the data from state and use a filter instead. This used to set what was inside of the getBeers api call. 
-      ? "https://api.punkapi.com/v2/beers?beer_name=" + searchTerm
-      : "https://api.punkapi.com/v2/beers?page=1&per_page=80";
-    setPageContent(newPageContent);
+    // const newPageContent = searchTerm                             // CHANGE LOGIC HERE - get the data from state and use a filter instead. This used to set what was inside of the getBeers api call. 
+    //   ? "https://api.punkapi.com/v2/beers?beer_name=" + searchTerm
+    //   : "https://api.punkapi.com/v2/beers?page=1&per_page=80";
+
+    // setPageContent(newPageContent);
+
+
   };
+
+  console.log(matchingBeers)
 
   const cleanBeers = (beers) => {
     // adds in a placeholder image to any item with 'null' for an image URL
@@ -93,7 +99,7 @@ const App = () => {
         </section>
         {/* <img src={require('./images/brewdog.png')} /> */}
         <section className={styles.main}>
-          <Main beers={beers} radioValue={radioValue} />
+          <Main beers={beers} radioValue={radioValue} matchingBeers={matchingBeers}/>
         </section>
       </main>
     </>
