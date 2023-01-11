@@ -3,20 +3,23 @@ import { useState, useEffect } from "react";
 
 import Main from "./containers/Main";
 import SideNav from "./containers/SideNav";
+import { unstable_renderSubtreeIntoContainer } from "react-dom";
+
 
 const App = () => {
   const [beers, setBeers] = useState([]);
   const [pageContent, setPageContent] = useState(    "https://api.punkapi.com/v2/beers?page=1&per_page=80"
   );     // CHANGE STATE NAMES TO BE MORE REFLECTIVE OF WHAT IT'S DOING
   const [matchingBeers, setMatchingBeers] = useState([]);
-    // default state set to page 1 of api
+  const [inputLength, setInputLength] = useState(0)
+
 
   const [radioValue, setRadioValue] = useState("all");
 
   const updateDisplayedBeers = (searchTerm) => {
     // uses the search text to display relevant beers on the screen
-    console.log("searchTerm is ", searchTerm);
-    console.log(beers)
+    setInputLength(searchTerm.length)
+
     const matchingBeers = beers.filter((beer) => {
       const beerName = beer.name.toLowerCase();
     return beerName.includes(searchTerm.toLowerCase())
@@ -94,12 +97,12 @@ const App = () => {
         <section className={styles.sideNav}>
           <SideNav
             updateSearchText={updateDisplayedBeers}
-            setRadioValue={setRadioValue}
+            setRadioValue={setRadioValue} 
           />
         </section>
         {/* <img src={require('./images/brewdog.png')} /> */}
         <section className={styles.main}>
-          <Main beers={beers} radioValue={radioValue} matchingBeers={matchingBeers}/>
+          <Main beers={beers} radioValue={radioValue} matchingBeers={matchingBeers} inputLength={inputLength}/>
         </section>
       </main>
     </>

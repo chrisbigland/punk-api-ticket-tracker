@@ -5,6 +5,8 @@ const SearchBar = (props) => {
 
   const { updateSearchText, placeholder } = props;
 
+
+
   return (
     <>
     <input className={styles.searchBar} type="text" placeholder={placeholder} onInput={e => 

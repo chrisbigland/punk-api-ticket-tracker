@@ -5,25 +5,37 @@ import Beer from "../../components/Beer/Beer";
 import FeedbackPanel from "../../components/FeedbackPanel/FeedbackPanel";
 
 const BeerContainer = (props) => {
-  const { beers, radioValue, matchingBeers } = props;
+  const { beers, radioValue, matchingBeers, inputLength } = props;
 
+  const mappedBeers =
+    matchingBeers ? ( // are there any matching beers? (doesn't confirm whether someone's tried to search) - maybe put '&& inputLength > 0' at end here
+      matchingBeers.map((beer) => {
+        console.log("matching beers get mapped as matchingBeers.length > 0")
+        // if so, return those beers
+        return <Beer beer={beer} key={beer.id} />;
+      }) // otherwise, if there are no matching beers but someone as typed into the input box... show the feedback panel
+    ) : matchingBeers.length === 0 && inputLength > 0 ? (
+      <FeedbackPanel text="We're sorry but there aren't any beers matching that criteria. " />
+    ) : (
+      // else if matching beers is more than 0 and inputLength has a length
+      beers.map((beer) => {
+        console.log("beers get mapped as matchingBeers.length is 0 and input length is 0")
+        return <Beer beer={beer} key={beer.id} />;
+      })
+    );
 
-  const mappedBeers =  matchingBeers.length > 0 ? matchingBeers.map((beer) => { return <Beer beer={beer} key={beer.id} />}) : beers.map((beer) => { 
+  // FOR TOMORROW - search 'helloooooo' then click on 'classic' beers radio button - see why it is breaking. 'mappedBeers.filter is not a function' error
 
-
-    return <Beer beer={beer} key={beer.id} />;
-  });
-  console.log("matchingbeer length is ", matchingBeers.length)
-  console.log(matchingBeers ? "matchingbeers beers has value" : "it doesn't have value")
-
-
-
-
-  const getBeersJSX = () => {        
-    if (radioValue === "all" && beers.length) { 
+  const getBeersJSX = () => {
+    if (radioValue === "all") {
+      // console.log(
+      //   "radio value is 'all' and matchingBeers.length is less than or equal to zero"
+      // ); // if matching beers has no length. !matchingBeers /// got rid of && beers.length
       return mappedBeers;
-    } else if (radioValue === "abv" && beers.length) {
-      const highAbvBeers = mappedBeers.filter((beer) => { 
+    } else if (radioValue === "abv") { // got rid of && beers.length
+      // got rid of && beers.length
+      const highAbvBeers = mappedBeers.filter((beer) => {
+        console.log("we're in the abv section of getBeersJSX")
         return beer.props.beer.abv > 6;
       });
       return highAbvBeers.length <= 0 ? (
@@ -31,7 +43,8 @@ const BeerContainer = (props) => {
       ) : (
         highAbvBeers
       );
-    } else if (radioValue === "classic" && beers.length) {
+    } else if (radioValue === "classic") { // got rid of && beers.length
+      // got rid of && beers.length
       const classicBeers = mappedBeers.filter((beer) => {
         return beer.props.beer.first_brewed.slice(3) < 2010;
       });
@@ -40,7 +53,7 @@ const BeerContainer = (props) => {
       ) : (
         classicBeers
       );
-    } else if (radioValue === "acidic" && beers.length) {
+    } else if (radioValue === "acidic") { // got rid of && beers.length
       const acidicBeers = mappedBeers.filter((beer) => {
         return beer.props.beer.ph < 4;
       });
@@ -50,17 +63,14 @@ const BeerContainer = (props) => {
         acidicBeers
       );
     } else {
-      console.log("we are in the else clause")
+      console.log("we are in the else clause");
       return (
         <FeedbackPanel text="We're sorry but there aren't any beers matching that criteria. " />
-   
-        
       );
     }
   };
 
   useEffect(() => {
-
     getBeersJSX();
   }, [beers]);
 
