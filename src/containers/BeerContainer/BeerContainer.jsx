@@ -8,7 +8,7 @@ const BeerContainer = (props) => {
   const { beers, radioValue, matchingBeers, inputLength } = props;
 
   const mappedBeers =
-    matchingBeers ? ( // are there any matching beers? (doesn't confirm whether someone's tried to search) - maybe put '&& inputLength > 0' at end here
+    matchingBeers.length > 0 ? ( // are there any matching beers? (doesn't confirm whether someone's tried to search) - maybe put '&& inputLength > 0' at end here
       matchingBeers.map((beer) => {
         console.log("matching beers get mapped as matchingBeers.length > 0")
         // if so, return those beers
@@ -25,6 +25,8 @@ const BeerContainer = (props) => {
     );
 
   // FOR TOMORROW - search 'helloooooo' then click on 'classic' beers radio button - see why it is breaking. 'mappedBeers.filter is not a function' error
+console.log("mappedBeers is ", mappedBeers)
+console.log("mappedBeers.length is ", mappedBeers.length)
 
   const getBeersJSX = () => {
     if (radioValue === "all") {
@@ -32,7 +34,7 @@ const BeerContainer = (props) => {
       //   "radio value is 'all' and matchingBeers.length is less than or equal to zero"
       // ); // if matching beers has no length. !matchingBeers /// got rid of && beers.length
       return mappedBeers;
-    } else if (radioValue === "abv") { // got rid of && beers.length
+    } else if (radioValue === "abv" && mappedBeers.length) { // got rid of && beers.length
       // got rid of && beers.length
       const highAbvBeers = mappedBeers.filter((beer) => {
         console.log("we're in the abv section of getBeersJSX")
@@ -43,7 +45,7 @@ const BeerContainer = (props) => {
       ) : (
         highAbvBeers
       );
-    } else if (radioValue === "classic") { // got rid of && beers.length
+    } else if (radioValue === "classic" && mappedBeers.length) { // got rid of && beers.length
       // got rid of && beers.length
       const classicBeers = mappedBeers.filter((beer) => {
         return beer.props.beer.first_brewed.slice(3) < 2010;
@@ -53,7 +55,7 @@ const BeerContainer = (props) => {
       ) : (
         classicBeers
       );
-    } else if (radioValue === "acidic") { // got rid of && beers.length
+    } else if (radioValue === "acidic" && mappedBeers.length) { // got rid of && beers.length
       const acidicBeers = mappedBeers.filter((beer) => {
         return beer.props.beer.ph < 4;
       });
