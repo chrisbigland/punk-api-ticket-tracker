@@ -14,7 +14,6 @@ const SideNav = (props) => {
   const acidic = document.querySelector("#acidic");
 
   const allocateCheck = () => {
-    // sets 'radioValue' state according to which radio button is checked
     if (allBeers.checked) {
       setRadioValue("all");
     } else if (aBV.checked) {
