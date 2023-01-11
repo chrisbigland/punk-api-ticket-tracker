@@ -8,8 +8,6 @@ import { unstable_renderSubtreeIntoContainer } from "react-dom";
 
 const App = () => {
   const [beers, setBeers] = useState([]);
-  const [pageContent, setPageContent] = useState(    "https://api.punkapi.com/v2/beers?page=1&per_page=80"
-  );     // CHANGE STATE NAMES TO BE MORE REFLECTIVE OF WHAT IT'S DOING
   const [matchingBeers, setMatchingBeers] = useState([]);
   const [inputLength, setInputLength] = useState(0)
 
@@ -29,13 +27,6 @@ const App = () => {
     setMatchingBeers(matchingBeers)
 
     console.log("beers are ", beers)
-    // const newPageContent = searchTerm                             // CHANGE LOGIC HERE - get the data from state and use a filter instead. This used to set what was inside of the getBeers api call. 
-    //   ? "https://api.punkapi.com/v2/beers?beer_name=" + searchTerm
-    //   : "https://api.punkapi.com/v2/beers?page=1&per_page=80";
-
-    // setPageContent(newPageContent);
-
-
   };
 
   console.log(matchingBeers)
@@ -82,14 +73,12 @@ const App = () => {
         });
     }
     console.log(beerArr.length);
-    setBeers(beerArr);
+    setBeers(cleanBeers(beerArr));
   };
 
   useEffect(() => {
-    // calls getBeers() only once the pageContent (state containing relevant fetch URL) has been set.
     getBeers();
-    // console.log(beers);
-  }, [pageContent]);
+  }, []);
 
   return (
     <>
@@ -100,7 +89,7 @@ const App = () => {
             setRadioValue={setRadioValue} 
           />
         </section>
-        {/* <img src={require('./images/brewdog.png')} /> */}
+
         <section className={styles.main}>
           <Main beers={beers} radioValue={radioValue} matchingBeers={matchingBeers} inputLength={inputLength}/>
         </section>
@@ -115,5 +104,5 @@ export default App;
 // if no image - put in a placeholder image. Do this after I've worked out how to display all beers on page (as first 80 all have images)
 // get multiple (more than 80) showing on page. For loop for this - fetch data from page one then two then three
 // write tests
-// write readme
 // styling
+// implement clean beers first - then fix null ph beers by adding in a n/a. Then in getBeersJSX in beer container - need to say 'if the value is n/a' then don't return it. 
