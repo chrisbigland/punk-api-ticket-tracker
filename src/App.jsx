@@ -5,41 +5,40 @@ import Main from "./containers/Main";
 import SideNav from "./containers/SideNav";
 import { unstable_renderSubtreeIntoContainer } from "react-dom";
 
-
 const App = () => {
   const [beers, setBeers] = useState([]);
   const [matchingBeers, setMatchingBeers] = useState([]);
-  const [inputLength, setInputLength] = useState(0)
-
+  const [inputLength, setInputLength] = useState(0);
 
   const [radioValue, setRadioValue] = useState("all");
 
   const updateDisplayedBeers = (searchTerm) => {
     // uses the search text to display relevant beers on the screen
-    setInputLength(searchTerm.length)
+    setInputLength(searchTerm.length);
 
     const matchingBeers = beers.filter((beer) => {
       const beerName = beer.name.toLowerCase();
-    return beerName.includes(searchTerm.toLowerCase())
-    })
+      return beerName.includes(searchTerm.toLowerCase());
+    });
 
-    console.log(matchingBeers) // set it to state?
-    setMatchingBeers(matchingBeers)
+    console.log(matchingBeers); // set it to state?
+    setMatchingBeers(matchingBeers);
 
-    console.log("beers are ", beers)
+    console.log("beers are ", beers);
   };
 
-  console.log(matchingBeers)
+  console.log(matchingBeers);
 
   const cleanBeers = (beers) => {
     // adds in a placeholder image to any item with 'null' for an image URL
     const cleanedBeers = beers.map((beer) => {
       if (beer.image_url === null) {
         beer.image_url = require("./images/brewdog.png");
-        return beer;
-      } else {
-        return beer;
+      } 
+      if (beer.ph === null) {
+        beer.ph = " N/A"
       }
+      return beer;
     });
     return cleanedBeers;
   };
@@ -56,7 +55,7 @@ const App = () => {
   // How to deal with text appearing before beers load- if this fetch hasn't completed then display a 'loading' spinner element (state to add in)
 
   const getBeers = async () => {
-    let beerArr = [];     // if there is a searchterm value then I want to run the pageContent (URL)
+    let beerArr = []; // if there is a searchterm value then I want to run the pageContent (URL)
     for (let index = 1; index < 6; index++) {
       // fetches beers from API and sets them to state 'beers'
       await fetch(`https://api.punkapi.com/v2/beers?page=${index}&per_page=80`)
@@ -86,12 +85,17 @@ const App = () => {
         <section className={styles.sideNav}>
           <SideNav
             updateSearchText={updateDisplayedBeers}
-            setRadioValue={setRadioValue} 
+            setRadioValue={setRadioValue}
           />
         </section>
 
         <section className={styles.main}>
-          <Main beers={beers} radioValue={radioValue} matchingBeers={matchingBeers} inputLength={inputLength}/>
+          <Main
+            beers={beers}
+            radioValue={radioValue}
+            matchingBeers={matchingBeers}
+            inputLength={inputLength}
+          />
         </section>
       </main>
     </>
@@ -105,4 +109,4 @@ export default App;
 // get multiple (more than 80) showing on page. For loop for this - fetch data from page one then two then three
 // write tests
 // styling
-// implement clean beers first - then fix null ph beers by adding in a n/a. Then in getBeersJSX in beer container - need to say 'if the value is n/a' then don't return it. 
+// implement clean beers first - then fix null ph beers by adding in a n/a. Then in getBeersJSX in beer container - need to say 'if the value is n/a' then don't return it.
