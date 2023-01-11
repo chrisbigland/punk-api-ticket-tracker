@@ -43,7 +43,7 @@ const BeerContainer = (props) => {
       );
     } else if (radioValue === "acidic" && mappedBeers.length) {
       const acidicBeers = mappedBeers.filter((beer) => {
-        return beer.props.beer.ph < 4 && beer.props.beer.ph != " N/A"
+        return beer.props.beer.ph < 4 && beer.props.beer.ph != " N/A";
       });
       return acidicBeers.length <= 0 ? (
         <FeedbackPanel text="We're sorry but there aren't any beers matching that criteria. " />

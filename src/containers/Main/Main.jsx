@@ -5,7 +5,7 @@ import FeedbackPanel from '../../components/FeedbackPanel/FeedbackPanel'
 
 const Main = (props) => {
 
-  const { beers, radioValue, matchingBeers, inputLength } = props; // beer data
+  const { beers, radioValue, matchingBeers, inputLength } = props; 
 
   return (
     <>
