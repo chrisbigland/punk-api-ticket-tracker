@@ -27,13 +27,17 @@ const SideNav = (props) => {
 
   return (
     <>
- 
-    <section className={styles.sideNav}>
-    <SearchBar updateSearchText={updateSearchText} placeholder="Search beers..." />
-    <RadioButtons allocateCheck={allocateCheck} />
-    </section>
+      <section className={styles.sideNav}>
+        <div className={styles.searchBar}>
+          <SearchBar
+            updateSearchText={updateSearchText}
+            placeholder="Search beers..."
+          />
+        </div>
+        <RadioButtons allocateCheck={allocateCheck} />
+      </section>
     </>
-  )
+  );
 }
 
 export default SideNav
