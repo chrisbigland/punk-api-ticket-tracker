@@ -9,6 +9,13 @@ I was also able to implement newly gained knowledge on how to fetch different ty
 
 Producing this project allowed me to encounter new problems such as this and work out solutions. 
 
+# Usage Instructions
+TBC
+
+# Project files
+index.js etc. 
+TBC
+
 # Project component tree
 ![component tree](src/images/component-tree.png)
 
