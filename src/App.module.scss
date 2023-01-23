@@ -17,3 +17,9 @@
     background-image: url('./images/beer.jpg');
     width: 87vw;
 }
+
+@media screen and (max-width: 565px) {
+    .sideNav {
+        width: 20vw;
+    }
+}
