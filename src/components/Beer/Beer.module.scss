@@ -16,5 +16,77 @@
 }
 
 .description {
-    font-size: 0.5rem;
+    font-size: 0.6rem;
 }
+
+.stats {
+    margin-top: 5px;
+}
+
+@media screen and (max-width: 1045px) {
+    .card {
+        width: 200px;
+        height: 250px;
+    }
+    .name {
+        font-size: 1rem;
+    }
+    .stats {
+        font-size: 0.7rem;
+    }
+}
+
+@media screen and (max-width: 830px) {
+    .card {
+
+        width: 230px;
+        height: 280px;
+    }
+
+    .stats {
+        font-size: 0.9rem;
+    }
+  }
+
+  @media screen and (max-width: 655px) {
+    .card {
+        width: 200px;
+        height: 250px;
+    }
+    .stats {
+        font-size: 0.7rem;
+    }
+  }
+
+  @media screen and (max-width: 565px) {
+    .card {
+        width: 250px;
+        height: 300px;
+        margin-left: 75px;
+    }
+    .name {
+        font-size: 1.3rem;
+    }
+    .stats {
+        font-size: 1rem;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .card {
+        width: 200px;
+        height: 250px;
+    }
+    .name {
+        font-size: 1rem;
+    }
+    .stats {
+        font-size: 0.7rem;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    .card {
+        margin-left: 20px;
+    }
+  }
